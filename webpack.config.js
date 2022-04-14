@@ -18,6 +18,7 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(),
     new miniCss({
       filename: '[name].[contenthash].css'
     }),
@@ -26,21 +27,13 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        {from: '/img', to: './img/'},
-        {from: './node_modules/three/examples/jsm/loaders/DRACOLoader.js', to: './'}
+        {from: './node_modules/three/examples/js/libs/draco', to: './lib'},
+        {from: './img', to: './img'}
       ]
-    }),
-    new CleanWebpackPlugin()
+    })
   ],
   module: {
     rules: [
-      {
-        test: /\.(png|jpe?g|gif|jpg|svg)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]'
-        }
-      },
       {
         test: /\.(s*)css$/,
         use: [
